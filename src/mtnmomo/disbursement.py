@@ -28,6 +28,21 @@ class Disbursement(MomoApi, object):
         return super(Disbursement, self).getTransactionStatus(
             transaction_id, url, super(Disbursement, self).config.disbursementsKey)
 
+    def getUserBasicInfo(
+            self,
+            account_holder_id,
+            **kwargs):
+        _url = "/disbursement/v1_0/accountholder/msisdn/{}/basicuserinfo".format(account_holder_id)
+        url = super(Disbursement, self).config.baseUrl + _url
+        headers = {
+            "X-Target-Environment": super(Disbursement, self).config.environment,
+            "Content-Type": "application/json",
+            "Ocp-Apim-Subscription-Key": super(Disbursement, self).config.disbursementsKey,
+        }
+        resp = self.request('GET', url, headers)
+        return resp
+
+
     def transfer(
             self,
             amount,
