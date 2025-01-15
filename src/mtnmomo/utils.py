@@ -156,13 +156,13 @@ def requests_retry_session(
 
 
 def validate_phone_number(number):
-    obj = phonenumbers.parse(number, "UG")
+    obj = phonenumbers.parse(number, "SS")
     if not phonenumbers.is_valid_number(obj):
         raise ValidationError("Invalid Phone number {0}".format(number))
     if (carrier.name_for_number(obj, "en") != "MTN"):
         raise ValidationError(
             "{0}: Only MTN is supported at the moment".format(number))
-    return "256{0}".format(obj.national_number)
+    return "211{0}".format(obj.national_number)
 
 
 def validate_number(number):
